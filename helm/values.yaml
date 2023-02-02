@@ -1,0 +1,4 @@
+keycloak:
+  auth:
+    existingSecret: "keycloak-secret"
+    passwordSecretKey: "adminPassword"
