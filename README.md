@@ -60,5 +60,5 @@ Find the canonical documentation (on the usage of kubeseal) [over there](https:/
   ```
 - Create the application
   ```bash
-  kubectl apply -f application.yaml
+  kubectl apply -f application.yaml -n argocd
   ```
