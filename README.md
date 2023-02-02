@@ -33,14 +33,32 @@ Kubernetes:
   helm install agentx -n sealed-secrets --set-string fullnameOverride=sealed-secrets-controller bitnami/sealed-secrets
   ```
 
+## Sealed secret
+
+Find the canonical documentation (on the usage of kubeseal) [over there](https://github.com/bitnami-labs/sealed-secrets#usage)
+
+- Create a regular Kubernetes secret in a local directory that's NOT under version control ... and don't forget setting the namespace
+  ```bash
+  echo -n [to secret password] | kubectl create secret generic keycloak-secret --dry-run=client --from-file=adminPassword=/dev/stdin -o yaml -n neverland > keycloak-secret.yaml
+  ```
+- Create a sealed secret using this file
+  ```bash
+  kubeseal --controller-namespace sealed-secrets --format yaml -f keycloak-secret.yaml > keycloak-sealed-secret.yaml
+  ```
+  which can be safely committed
+
+
 ## Deployment
 
 - Create namespace
   ```bash
   kubectl create namespace neverland
   ```
-- Create secret in namespace that contains the password for the Keycloak admin account, this will later be replaced with a sealed secret
+- Create secret in namespace that contains the password for the default Keycloak admin account, from the sealed secret created earlier
   ```bash
-  kubectl create secret generic keycloak-secret --from-literal=adminPassword=[top secret password] -n neverland
+  kubectl create -f keycloak-sealed-secret.yaml -n neverland
   ```
-- Create new application via Argo CD web frontend
+- Create the application
+  ```bash
+  kubectl apply -f application.yaml
+  ```
