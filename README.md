@@ -13,6 +13,22 @@ Misc. stuff:
 
 Kubernetes:
 - Argo CD operator is installed in the cluster, see e.g. [Argo CD Overview](https://kubebyexample.com/learning-paths/argo-cd/argo-cd-overview)
+  
+  ```bash
+  kubectl create namespace argocd
+  ```
+
+  ```bash
+  # Use e.g. 'v2.5.9' instead of 'stable' for a specific version
+  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  ```
+
+- Patch the ArgoCD service from ClusterIP to a LoadBalancer instead of using port forwarding (from: [ArgoCD Tutorial](https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/index.html))
+  
+  ```bash
+  kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+  ```
+
 - The Sealed Secrets operator is installed in the cluster.
   
   I'm using the Helm chart provided by Bitnami (because i'm lazy), but the operator is installed into a separate namespace:
