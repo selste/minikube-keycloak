@@ -39,7 +39,7 @@ Find the canonical documentation (on the usage of kubeseal) [over there](https:/
 
 - Create a regular Kubernetes secret in a local directory that's NOT under version control ... and don't forget setting the namespace
   ```bash
-  echo -n [to secret password] | kubectl create secret generic keycloak-secret --dry-run=client --from-file=adminPassword=/dev/stdin -o yaml -n neverland > keycloak-secret.yaml
+  echo -n [top secret password] | kubectl create secret generic keycloak-secret --dry-run=client --from-file=adminPassword=/dev/stdin -o yaml -n neverland > keycloak-secret.yaml
   ```
 - Create a sealed secret using this file
   ```bash
