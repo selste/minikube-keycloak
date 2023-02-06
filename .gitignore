@@ -37,3 +37,6 @@ out/
 .vscode/
 
 .scratchpad/
+
+### Helm Dependencies ###
+helm/charts/
