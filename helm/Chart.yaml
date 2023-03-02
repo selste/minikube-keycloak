@@ -3,9 +3,9 @@ name: neverland
 description: A Helm chart for deploying Keycloak
 type: application
 version: 0.0.1
-appVersion: "20.0.3"
+appVersion: "20.0.1"
 
 dependencies:
   - name: keycloak
-    version: 13.0.3
+    version: 12.3.0
     repository: https://charts.bitnami.com/bitnami
