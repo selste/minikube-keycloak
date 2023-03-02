@@ -52,6 +52,27 @@ keycloak:
   keycloakConfigCli:
     enabled: true
 
+    ## @param keycloakConfigCli.command Command for running the container (set to default if not set). Use array form
+    ##
+    command:
+      - java
+      - -jar
+      - /opt/bitnami/keycloak-config-cli/keycloak-config-cli.jar
+      
+    ## @param keycloakConfigCli.configuration keycloak-config-cli realms configuration
+    ## NOTE: nil keys will be considered files to import locally
+    ## Example:
+    ## configuration:
+    ##   realm1.json: |
+    ##     {
+    ##       "realm": "realm1",
+    ##       "clients": []
+    ##     }
+    ##   files/realm2.yaml:
+    ##   realm3.yaml: |
+    ##     realm: realm3
+    ##     clients: []
+    ##
     configuration:
       realm_master.json: |
         {
