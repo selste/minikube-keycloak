@@ -1,4 +1,45 @@
+neverland:
+  passwordSealed: "AgBlMY9L/4ePRIvdrNeOaBwlryoz9HBRmF/KtmH92ZrVT9ijT06nyZoDcYpyi8htCNsYtKnjR9tyP69Swo8xL8EvMV5ZMc65JufZy9lqdYdsu4kn9UgS2xwpAN8LUEVjHwNGkqMSayZlGyw2RmM9iGMo/TXp59skq1xhxMRXWde+qrZDLP1B7RL+vE0bu+isfyI72ExZ9/8r0CgZSNcSf5e4pQ3V/xeEe29ASN+dxlIRWW9iF1CXxt/kTv85ZxdUpF1c8dJmo3XejSdwjXHc+NzO9bR4izGlSeu567roqOhkh3twWCXslhdxUncW1avOvC4oYkibeC0Y3/hRQl6sS3BEVw9N9nzTpZ4x82F8ixQkRxTiD/q9oZLpDldFuMsMTtDsdk433w04/da6UMO8Ty4rv2Y0hIHdJaor1x0mI6/FkLnM7QTj/yJ6LWjRDtSq/8SLuZG1h1P3RZD8grAemYiH9ETEn+XCBlzaeKalIkDve6gdKvTJO1fnRFNAcbk42gDx2qg37tZ+77PDFqB0aHAJo2cHgiY69WtU3ZofqEwB51rO6NI8ZN2T8vq0w69WXzR2SEtYBTOXkLXUDT4hzyH6houN8+App4GEiEbc4RtBiUeMJMaze5CI+XK0buZTd+gQ0GT3lVB1fpUoHwNOVR1e39I87rh4WY6OdqCrYDL4cs6zhl7dyDHFQj1ImnGlbNJ35i+jiQgObMY="
+
 keycloak:
+  ## Keycloak authentication parameters
+  ## ref: https://github.com/bitnami/containers/tree/main/bitnami/keycloak#admin-credentials
+  ##
   auth:
+    ## @param auth.existingSecret Existing secret containing Keycloak admin password
+    ##
     existingSecret: "keycloak-secret"
-    passwordSecretKey: "adminPassword"
+    ## @param auth.passwordSecretKey Key where the Keycloak admin password is being stored inside the existing secret.
+    ##
+    passwordSecretKey: "adminPassword" 
+
+  ## @section Exposure parameters
+  ##
+  
+  ## Service configuration
+  ##
+  service:
+    ## @param service.type Kubernetes service type
+    ##
+    type: ClusterIP
+
+  ## Keycloak ingress parameters
+  ## ref: https://kubernetes.io/docs/user-guide/ingress/
+  ##
+  ingress:
+    ## @param ingress.enabled Enable ingress record generation for Keycloak
+    ##
+    enabled: true
+
+  keycloakConfigCli:
+    enabled: true
+
+    configuration:
+      realm_master.json: |
+        {
+          "realm": "master",
+          "adminEventsEnabled": true,
+          "adminEventsDetailsEnabled": true,
+          "eventsEnabled": true,
+          "eventsExpiration": 259200
+        }
