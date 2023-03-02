@@ -1,5 +1,5 @@
 apiVersion: v2
-name: keycloak
+name: neverland
 description: A Helm chart for deploying Keycloak
 type: application
 version: 0.0.1
