@@ -63,6 +63,8 @@ Find the canonical documentation (on the usage of kubeseal) [over there](https:/
   ```
   which can be safely committed
 
+  Caveat: Since the public key portion (of the key certificate) is used for sealing the secrets it will be necessary to replace the secrets if the Sealed Secrets operator has to be installed again - although it is possible to manually manage the key(s) ...
+
 
 ## Deployment
 
